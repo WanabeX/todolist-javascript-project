@@ -1,0 +1,199 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+body {
+  background-color: #232323;
+  background-image: radial-gradient(#535353 0.75px, #232323 0.75px);
+  background-size: 15px 15px;
+}
+
+.task-title {
+  padding: 30px;
+}
+
+.task-title #today {
+  color: #959595;
+}
+
+.task-title #tasks {
+  font-size: 13px;
+  text-align: right;
+  float: right;
+}
+
+.task-title #title {
+  margin-top: 5px;
+  font-weight: 900;
+  font-size: 35px;
+  letter-spacing: -1px;
+}
+
+.wrapper {
+  max-width: 400px;
+  margin: 120px auto;
+  background: #ffffff;
+  border-radius: 1px;
+}
+
+.task-input {
+  height: 45px;
+  padding: 0 25px;
+  position: relative;
+}
+
+.task-input ion-icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(12px, -50%);
+  color: #b9b9b9;
+}
+
+.task-input input {
+  height: 100%;
+  width: 85%;
+  border-radius: 3px;
+  border: 1px solid #b9b9b9;
+  padding: 0 20px 0 40px;
+}
+
+.task-input input:focus {
+  outline: none;
+  border: 1.5px solid #232323;
+}
+
+.task-input input::placeholder {
+  color: #b9b9b9;
+  font-size: 15px;
+}
+
+.task-input button {
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  border-radius: 1px;
+  border: none;
+  color: #ffffff;
+  margin-left: 5px;
+  font-size: 20px;
+  outline: none;
+  background: #343434;
+  cursor: pointer;
+}
+
+.task-input button:hover {
+  background: #f25832;
+}
+
+.task-box {
+  margin: 20px;
+}
+
+.task-box .task {
+  list-style: none;
+}
+
+.task-box .task:hover {
+  background-color: #e7e7e7;
+  transition: background 0.3s linear;
+  scale: 1.01;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+input[type="checkbox"] {
+  cursor: pointer;
+  opacity: 0;
+}
+
+label span{
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 260px;
+  padding: 10px 30px 10px 10px;
+}
+
+input[type="checkbox"]:checked + span::before{
+  content: "";
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark Circle</title><path d='M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm108.25 138.29l-134.4 160a16 16 0 01-12 5.71h-.27a16 16 0 01-11.89-5.3l-57.6-64a16 16 0 1123.78-21.4l45.29 50.32 122.59-145.91a16 16 0 0124.5 20.58z'/></svg>");
+  background-position: center;
+  background-size: contain;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  left: -12.5px;
+  top: 11px;
+}
+
+label span::after {
+  content: "";
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>");
+  background-position: center;
+  background-size: contain;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+  left: -12px;
+  top: 11px;
+}
+
+.task ion-icon {
+  cursor: pointer;
+  padding: 2px;
+}
+
+.task ion-icon:hover {
+  color: #f25832;
+}
+
+.task-controls,
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 0px 15px 0px 15px;
+}
+
+.task-controls {
+  padding: 15px 25px;
+  border-top: 1px solid #e4e4e4;
+}
+
+.filters span:hover {
+  color: #f25832;
+}
+
+.filters span {
+  cursor: pointer;
+  margin: 20px 10px 5px 0;
+  font-size: 13px;
+}
+
+.filters span.active {
+  color: #f25832;
+}
+
+.task-controls .clear-btn {
+  outline: none;
+  border: 1px solid #f25832;
+  border-radius: 9px;
+  color: #f25832;
+  background: none;
+  cursor: pointer;
+  padding: 2px 5px 0 5px;
+}
+
+.task-controls .clear-btn:hover {
+  outline: none;
+  border: 1px solid #f25832;
+  border-radius: 9px;
+  color: #ffffff;
+  background: #f25832;
+  cursor: pointer;
+  padding: 2px 5px 0 5px;
+}
