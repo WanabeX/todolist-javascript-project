@@ -1,3 +1,5 @@
+/* RESETS */
+
 * {
   margin: 0;
   padding: 0;
@@ -5,11 +7,24 @@
   font-family: "Noto Sans KR", sans-serif;
 }
 
+/* BODY */
+
 body {
   background-color: #232323;
   background-image: radial-gradient(#535353 0.75px, #232323 0.75px);
   background-size: 15px 15px;
 }
+
+/* TODOLIST WRAPPER */
+
+.wrapper {
+  max-width: 400px;
+  margin: 130px auto;
+  background: #ffffff;
+  border-radius: 1px;
+}
+
+/* HEADER - TODAY, TASKS LEFT, TITLE */
 
 .task-title {
   padding: 30px;
@@ -32,12 +47,7 @@ body {
   letter-spacing: -1px;
 }
 
-.wrapper {
-  max-width: 400px;
-  margin: 120px auto;
-  background: #ffffff;
-  border-radius: 1px;
-}
+/* TASK INPUT */
 
 .task-input {
   height: 45px;
@@ -47,6 +57,7 @@ body {
 
 .task-input ion-icon {
   position: absolute;
+  left: 6%;
   top: 50%;
   transform: translate(12px, -50%);
   color: #b9b9b9;
@@ -65,10 +76,16 @@ body {
   border: 1.5px solid #232323;
 }
 
+.task-input input:focus+.task-icon {
+  color: #232323;
+}
+
 .task-input input::placeholder {
   color: #b9b9b9;
   font-size: 15px;
 }
+
+/* ADD BUTTON */
 
 .task-input button {
   width: 50px;
@@ -80,17 +97,37 @@ body {
   margin-left: 5px;
   font-size: 20px;
   outline: none;
+  background: #b9b9b9;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.task-input button.active {
+  width: 50px;
+  height: 100%;
+  position: absolute;
+  border-radius: 1px;
+  border: none;
+  color: #ffffff;
+  margin-left: 5px;
+  font-size: 20px;
+  outline: none;
   background: #343434;
   cursor: pointer;
+  pointer-events: auto;
 }
 
 .task-input button:hover {
   background: #f25832;
 }
 
+/* TASK BOX */
+
 .task-box {
   margin: 20px;
 }
+
+/* TASK */
 
 .task-box .task {
   list-style: none;
@@ -104,12 +141,7 @@ body {
   font-weight: 700;
 }
 
-input[type="checkbox"] {
-  cursor: pointer;
-  opacity: 0;
-}
-
-label span{
+label span {
   cursor: pointer;
   position: relative;
   display: inline-block;
@@ -117,29 +149,36 @@ label span{
   padding: 10px 30px 10px 10px;
 }
 
-input[type="checkbox"]:checked + span::before{
-  content: "";
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark Circle</title><path d='M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm108.25 138.29l-134.4 160a16 16 0 01-12 5.71h-.27a16 16 0 01-11.89-5.3l-57.6-64a16 16 0 1123.78-21.4l45.29 50.32 122.59-145.91a16 16 0 0124.5 20.58z'/></svg>");
-  background-position: center;
-  background-size: contain;
-  width: 19px;
-  height: 19px;
-  position: absolute;
-  left: -12.5px;
-  top: 11px;
-}
+/* TASK CHECKBOX */
 
 label span::after {
-  content: "";
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>");
+  content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>");
   background-position: center;
   background-size: contain;
   width: 18px;
   height: 18px;
   position: absolute;
   left: -12px;
-  top: 11px;
+  top: 10px;
 }
+
+input[type="checkbox"] {
+  cursor: pointer;
+  opacity: 0;
+}
+
+input[type="checkbox"]:checked+span::before {
+  content: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Checkmark Circle</title><path d='M256 48C141.31 48 48 141.31 48 256s93.31 208 208 208 208-93.31 208-208S370.69 48 256 48zm108.25 138.29l-134.4 160a16 16 0 01-12 5.71h-.27a16 16 0 01-11.89-5.3l-57.6-64a16 16 0 1123.78-21.4l45.29 50.32 122.59-145.91a16 16 0 0124.5 20.58z'/></svg>");
+  background-position: center;
+  background-size: contain;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+  left: -12.5px;
+  top: 9px;
+}
+
+/* TASK SETTING BUTTON - EDIT AND DELETE */
 
 .task ion-icon {
   cursor: pointer;
@@ -149,6 +188,8 @@ label span::after {
 .task ion-icon:hover {
   color: #f25832;
 }
+
+/* FOOTER - FILTERS */
 
 .task-controls,
 li {
@@ -177,6 +218,8 @@ li {
 .filters span.active {
   color: #f25832;
 }
+
+/* FOOTER - CLEAR ALL */
 
 .task-controls .clear-btn {
   outline: none;

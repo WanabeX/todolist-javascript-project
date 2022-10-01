@@ -1,103 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/style.css" />
-    <title>ToDoList - WANA</title>
-  </head>
-  <body>
-    <div class="wrapper">
-      <header class="task-title">
-        <span id="today">Tuesday, 27 Sep</span>
-        <span id="tasks"> 6 tasks left</span>
-        <h1 id="title">To Do List</h1>
-      </header>
-      <div class="task-input">
-        <ion-icon name="menu"></ion-icon>
-        <input type="text" placeholder="Add a new task" />
-        <button>+</button>
-      </div>
-      <ul class="task-box">
-        <li class="task">
-          <label for="1">
-            <input type="checkbox" id="1" />
-            <span class="deco-line" for="1" id="tasks-left">First todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-        <li class="task">
-          <label for="2">
-            <input type="checkbox" id="2" />
-            <span id="tasks-left">Second todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-        <li class="task">
-          <label for="3">
-            <input type="checkbox" id="3" />
-            <span id="tasks-left">Third todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-        <li class="task">
-          <label for="4">
-            <input type="checkbox" id="4" />
-            <span id="tasks-left">Fourth todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-        <li class="task">
-          <label for="5">
-            <input type="checkbox" id="5" />
-            <span id="tasks-left">Fifth todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-        <li class="task">
-          <label for="6">
-            <input type="checkbox" id="6" />
-            <span id="tasks-left">Sixth todo</span>
-          </label>
-          <div class="settings">
-            <ion-icon name="create-outline"></ion-icon>
-            <ion-icon name="trash"></ion-icon>
-          </div>
-        </li>
-      </ul>
-      <footer class="task-controls">
-        <div class="filters">
-          <span id="all" class="active">All</span>
-          <span id="pending">Pending</span>
-          <span id="completed">Completed</span>
-        </div>
-        <button class="clear-btn">Clear All</button>
-      </footer>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>ToDoList - WANA</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="task-title">
+      <span id="today">Tuesday, 27 Sep</span>
+      <span id="tasks"> 6 tasks left</span>
+      <h1 id="title">To Do List</h1>
+    </header>
+    <div class="task-input">
+      <input type="text" maxlength="50" placeholder="Add a new task" />
+      <ion-icon class="task-icon" name="menu"></ion-icon>
+      <button>+</button>
     </div>
-        <!-- Iconsout Link For Icons -->
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-  </body>
+    <ul class="task-box">
+    </ul>
+    <footer class="task-controls">
+      <div class="filters">
+        <span id="all" class="active">All</span>
+        <span id="pending">Pending</span>
+        <span id="completed">Completed</span>
+      </div>
+      <button class="clear-btn">Clear All</button>
+    </footer>
+  </div>
+  <!-- Iconsout Link For Icons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
+  </script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js">
+  </script>
+  <script src="js/script.js"></script>
+</body>
+
 </html>
