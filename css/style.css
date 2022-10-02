@@ -127,28 +127,6 @@ body {
   margin: 20px;
 }
 
-/* TASK */
-
-.task-box .task {
-  list-style: none;
-}
-
-.task-box .task:hover {
-  background-color: #e7e7e7;
-  transition: background 0.3s linear;
-  scale: 1.01;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-label span {
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  width: 260px;
-  padding: 10px 30px 10px 10px;
-}
-
 /* TASK CHECKBOX */
 
 label span::after {
@@ -176,6 +154,32 @@ input[type="checkbox"]:checked+span::before {
   position: absolute;
   left: -12.5px;
   top: 9px;
+}
+
+/* TASK */
+
+.task-box .task {
+  list-style: none;
+}
+
+.task-box .task:hover {
+  background-color: #e7e7e7;
+  transition: background 0.3s linear;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.task label span {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 260px;
+  padding: 10px 30px 10px 10px;
+}
+
+.task label span.checked{
+  text-decoration-line: line-through;
+  color: #959595;
 }
 
 /* TASK SETTING BUTTON - EDIT AND DELETE */

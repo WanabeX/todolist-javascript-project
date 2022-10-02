@@ -6,14 +6,16 @@ const TASK_KEY = "task-list";
 
 let tasks = JSON.parse(localStorage.getItem(TASK_KEY));
 
-// add the task into the HTML document
+// Add the task into the HTML document
 function showTask() {
   let li = "";
+  // If localStorage is not empty
   if (tasks) {
+    // Find task and painting
     tasks.forEach((task, id) => {
       li += `<li class="task">
             <label for="${id}">
-              <input type="checkbox" id="${id}" />
+              <input onclick="toggleCheckedStyle(this)" type="checkbox" id="${id}" />
               <span id="tasks-left">${task.name}</span>
             </label>
               <div class="settings">
@@ -25,6 +27,20 @@ function showTask() {
   taskBox.innerHTML = li;
 }
 showTask();
+
+// check the task status and updating
+function toggleCheckedStyle(checkedTask) {
+  // Get the task name in <span>tag
+  const taskName = checkedTask.parentElement.lastElementChild;
+  // If task "checked"
+  if (checkedTask.checked) {
+    // Add the css line style at task
+    taskName.classList.add("checked");
+  } else {
+    // Remove the css line style at task
+    taskName.classList.remove("checked");
+  }
+}
 
 // if input field is not empty, add button is activated
 taskInput.onkeyup = () => {
@@ -39,6 +55,7 @@ taskInput.onkeyup = () => {
 // If user click on the Add button
 addBtn.addEventListener("click", function () {
   let userTask = taskInput.value.trim();
+  // If localStorage is empty, send empty array
   if (!tasks) {
     tasks = [];
   }
@@ -49,7 +66,7 @@ addBtn.addEventListener("click", function () {
   showTask();
 });
 
-// if user put the task in the field and press 'enter'
+// If user put the task in the field and press 'enter'
 taskInput.addEventListener("keyup", (e) => {
   let userTask = taskInput.value.trim();
   if (e.key == "Enter" && userTask) {
