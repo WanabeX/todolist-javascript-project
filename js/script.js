@@ -76,6 +76,6 @@ taskInput.addEventListener("keyup", (e) => {
   let userTask = taskInput.value.trim();
   if (e.key == "Enter" && userTask) {
     addBtn.click();
-    //addBtn.classList.remove("active");
+    addBtn.classList.remove("active");
   }
 });
