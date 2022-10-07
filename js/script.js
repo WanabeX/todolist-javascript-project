@@ -6,22 +6,22 @@ const TASK_KEY = "task-list";
 
 let tasks = JSON.parse(localStorage.getItem(TASK_KEY));
 
-// Add the task into the HTML document
+// localstorage가 비어있지 않을 경우 HTML document에 task를 추가
 function showTask() {
   let li = "";
-  // If localStorage is not empty
   if (tasks) {
-    // Find task and painting
     tasks.forEach((task, id) => {
       li += `<li class="task">
       <label for="${id}">
         <input onclick="toggleCheckedStyle(this)" type="checkbox" id="${id}" />
-        <span id="tasks-left">${task.name}</span>
-      </label>
-      </div>
-        <div class="settings">
-          <ion-icon name="create-outline" id="${id}"></ion-icon>
-          <ion-icon onclick="removeTask(${id})" name="trash"></ion-icon>
+        <span class="for-pseudo-class"></span>
+        </label>
+      <div class="task-name">
+        <input id="tasks-left" type="text" value="${task.name}" readonly >
+        </div>
+      <div class="settings">
+        <button onclick="editTask(this, ${id}, event)">Edit</button>
+        <button onclick="removeTask(${id})">Remove</button>   
         </div>`;
     });
   }
@@ -29,11 +29,10 @@ function showTask() {
 }
 showTask();
 
-// Checking status and add checked CSS
+// 체크박스 상태에 따른 효과 적용
 function toggleCheckedStyle(checkedTask) {
-  // Get the task name from <span>tag
-  const taskName = checkedTask.parentElement.querySelector("span");
-  // If task "checked"
+  const taskName =
+    checkedTask.parentElement.parentElement.querySelector(".task-name input");
   if (checkedTask.checked) {
     taskName.classList.add("checked");
   } else {
@@ -41,14 +40,40 @@ function toggleCheckedStyle(checkedTask) {
   }
 }
 
-// Remove task
+// Task 편집
+function editTask(editBtn, id, e) {
+  const checkBox =
+    editBtn.parentElement.parentElement.querySelector("label input");
+  const editedTask =
+    editBtn.parentElement.parentElement.querySelector(".task-name input");
+
+  if (e.target.tagName === "BUTTON") {
+    const btn = e.target;
+    if (btn.textContent === "Edit") {
+      editedTask.removeAttribute("readonly");
+      editedTask.focus();
+      checkBox.disabled = true;
+      editedTask.classList.remove("checked");
+      btn.textContent = "Save";
+    } else if (btn.textContent === "Save") {
+      editedTask.setAttribute("readonly", true);
+      editedTask.blur();
+      checkBox.disabled = false;
+      btn.textContent = "Edit";
+      tasks[id].name = editedTask.value;
+    }
+  }
+  localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
+}
+
+// Task 삭제
 removeTask = (removeId) => {
   tasks.splice(removeId, 1);
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
   showTask();
 };
 
-// If input field is not empty, add button is activated
+// input이 비어있지 않을 경우 add버튼이 활성화
 taskInput.onkeyup = () => {
   let userTask = taskInput.value.trim();
   if (userTask) {
@@ -58,7 +83,7 @@ taskInput.onkeyup = () => {
   }
 };
 
-// If user click on the Add button
+// Add버튼을 클릭하여 task 추가
 addBtn.addEventListener("click", function () {
   let userTask = taskInput.value.trim();
   // If localStorage is empty, send empty array
@@ -72,7 +97,7 @@ addBtn.addEventListener("click", function () {
   showTask();
 });
 
-// If user put the task in the field and press 'enter'
+// Enter키를 눌러 task 추가
 taskInput.addEventListener("keyup", function (e) {
   let userTask = taskInput.value.trim();
   if (e.key == "Enter" && userTask) {
