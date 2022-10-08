@@ -20,7 +20,7 @@ function showTask() {
         <input id="tasks-left" type="text" value="${task.name}" readonly >
         </div>
       <div class="settings">
-        <button onclick="editTask(this, ${id}, event)">Edit</button>
+        <button onclick="editTask(this, ${id})">Edit</button>
         <button onclick="removeTask(${id})">Remove</button>   
         </div>`;
     });
@@ -41,27 +41,25 @@ function toggleCheckedStyle(checkedTask) {
 }
 
 // Task 편집
-function editTask(editBtn, id, e) {
+function editTask(editBtn, id) {
   const checkBox =
     editBtn.parentElement.parentElement.querySelector("label input");
   const editedTask =
     editBtn.parentElement.parentElement.querySelector(".task-name input");
-
-  if (e.target.tagName === "BUTTON") {
-    const btn = e.target;
-    if (btn.textContent === "Edit") {
-      editedTask.removeAttribute("readonly");
-      editedTask.focus();
-      checkBox.disabled = true;
-      editedTask.classList.remove("checked");
-      btn.textContent = "Save";
-    } else if (btn.textContent === "Save") {
-      editedTask.setAttribute("readonly", true);
-      editedTask.blur();
-      checkBox.disabled = false;
-      btn.textContent = "Edit";
-      tasks[id].name = editedTask.value;
-    }
+  if (editBtn.textContent === "Edit") {
+    editedTask.removeAttribute("readonly");
+    editedTask.focus();
+    checkBox.disabled = true;
+    editedTask.classList.remove("checked");
+    editBtn.textContent = "Save";
+    editBtn.style.color = "#f25832";
+  } else if (editBtn.textContent === "Save") {
+    editedTask.setAttribute("readonly", true);
+    editedTask.blur();
+    checkBox.disabled = false;
+    editBtn.textContent = "Edit";
+    editBtn.style.color = "";
+    tasks[id].name = editedTask.value;
   }
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
