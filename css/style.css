@@ -55,13 +55,13 @@ body {
   position: relative;
 }
 
-.task-input i {
+.task-input ion-icon {
   position: absolute;
-  left: 8%;
+  left: 6%;
   top: 50%;
   transform: translate(12px, -50%);
   color: #b9b9b9;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .task-input input {
@@ -70,6 +70,7 @@ body {
   border-radius: 3px;
   border: 1px solid #b9b9b9;
   padding: 0 20px 0 40px;
+  font-size: 15px;
 }
 
 .task-input input:focus {
@@ -156,8 +157,12 @@ label {
   position: relative;
 }
 
-label span::before {
+input[type="checkbox"] {
   cursor: pointer;
+  opacity: 0;
+}
+
+.task span::before {
   content: "";
   background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' class='ionicon' viewBox='0 0 512 512'><title>Ellipse</title><circle cx='256' cy='256' r='192' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='32'/></svg>");
   background-position: center;
@@ -166,11 +171,7 @@ label span::before {
   height: 18px;
   position: absolute;
   left: -3px;
-}
-
-input[type="checkbox"] {
-  cursor: pointer;
-  opacity: 0;
+  top: 13.5px
 }
 
 input[type="checkbox"]:checked + span::after {
@@ -182,6 +183,7 @@ input[type="checkbox"]:checked + span::after {
   height: 18px;
   position: absolute;
   left: -3px;
+  top: 13.5px
 }
 
 /* TASK */
@@ -196,37 +198,36 @@ input[type="checkbox"]:checked + span::after {
   cursor: pointer;
 }
 
-.task-name input[type="text"] {
+.task span {
   border: none;
   background: none;
   cursor: pointer;
-  position: relative;
   display: inline-block;
-  width: 210px;
-  padding: 10px 10px 10px 5px;
-  word-wrap: break-word;
-  word-break: keep-all;
+  width: 230px;
+  padding: 15px 0 15px 3px;
+  font-size: 15px;
 }
 
-.task-name input[type="text"]:focus {
+.task span:focus {
   outline: none;
 }
 
-.task-name input[type="text"].checked {
+.task span.checked {
   text-decoration-line: line-through;
   color: #959595;
 }
 
 /* TASK SETTING BUTTON - EDIT AND DELETE */
 
-.task button {
+.task ion-icon {
   cursor: pointer;
-  padding-left: 10px;
   background: none;
   border: none;
+  font-size: 17px;
+  padding: 2px;
 }
 
-.task button:hover {
+.task ion-icon:hover {
   color: #f25832;
 }
 
@@ -238,7 +239,7 @@ li {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 5px;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 13px 0px 13px;
 }
 
 .task-controls {

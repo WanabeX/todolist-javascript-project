@@ -14,15 +14,13 @@ function showTask() {
       li += `<li class="task">
       <label for="${id}">
         <input onclick="toggleCheckedStyle(this)" type="checkbox" id="${id}" />
-        <span class="for-pseudo-class"></span>
+        <span id="tasks-left" >${task.name}</span>
         </label>
-      <div class="task-name">
-        <input id="tasks-left" type="text" value="${task.name}" readonly >
-        </div>
       <div class="settings">
-        <button onclick="editTask(this, ${id})">Edit</button>
-        <button onclick="removeTask(${id})">Remove</button>   
-        </div>`;
+        <ion-icon name="create-outline" onclick="editTask(this, ${id})"></ion-icon>
+        <ion-icon name="trash-outline" onclick="removeTask(${id})"></ion-icon>   
+        </div>
+        </li>`;
     });
   }
   taskBox.innerHTML = li;
@@ -32,34 +30,32 @@ showTask();
 // 체크박스 상태에 따른 효과 적용
 function toggleCheckedStyle(checkedTask) {
   const taskName =
-    checkedTask.parentElement.parentElement.querySelector(".task-name input");
+    checkedTask.parentElement.parentElement.querySelector("span");
   if (checkedTask.checked) {
     taskName.classList.add("checked");
   } else {
     taskName.classList.remove("checked");
   }
 }
-
 // Task 편집
 function editTask(editBtn, id) {
   const checkBox =
     editBtn.parentElement.parentElement.querySelector("label input");
-  const editedTask =
-    editBtn.parentElement.parentElement.querySelector(".task-name input");
-  if (editBtn.textContent === "Edit") {
-    editedTask.removeAttribute("readonly");
+  const editedTask = editBtn.parentElement.parentElement.querySelector("span");
+  if (editBtn.name === "create-outline") {
+    editedTask.setAttribute("contentEditable", true);
     editedTask.focus();
     checkBox.disabled = true;
     editedTask.classList.remove("checked");
-    editBtn.textContent = "Save";
+    editBtn.name = "checkmark-outline";
     editBtn.style.color = "#f25832";
-  } else if (editBtn.textContent === "Save") {
-    editedTask.setAttribute("readonly", true);
+  } else if (editBtn.name === "checkmark-outline") {
+    editedTask.setAttribute("contentEditable", false);
     editedTask.blur();
     checkBox.disabled = false;
-    editBtn.textContent = "Edit";
+    editBtn.name = "create-outline";
     editBtn.style.color = "";
-    tasks[id].name = editedTask.value;
+    tasks[id].name = editedTask.textContent;
   }
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
