@@ -187,6 +187,12 @@ input[type="checkbox"]:checked + span::after {
 }
 
 /* TASK */
+.task-box .empty-task{
+  color: #b9b9b9;
+  padding-left: 20px;
+  font-size: 15px;
+  font-weight: lighter;
+}
 
 .task-box .task {
   list-style: none;
@@ -203,7 +209,7 @@ input[type="checkbox"]:checked + span::after {
   background: none;
   cursor: pointer;
   display: inline-block;
-  width: 230px;
+  width: 260px;
   padding: 15px 0 15px 3px;
   font-size: 15px;
 }
