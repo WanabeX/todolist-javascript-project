@@ -34,9 +34,8 @@ body {
   color: #959595;
 }
 
-.task-title #tasks {
+.task-title #task-counter {
   font-size: 13px;
-  text-align: right;
   float: right;
 }
 

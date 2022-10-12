@@ -21,7 +21,7 @@ function showTask(filter) {
         <span class="${isCompleted}">${task.name}</span>
         </label>
       <div class="settings">
-        <ion-icon name="create-outline" onclick="editTask(this)"></ion-icon>
+        <ion-icon name="create-outline" onclick="editTask(this, ${id})"></ion-icon>
         <ion-icon name="trash-outline" onclick="removeTask(${id})"></ion-icon>   
         </div>
         </li>`;
@@ -30,8 +30,19 @@ function showTask(filter) {
   }
   taskBox.innerHTML =
     li || `<span class ="empty-task">※ You don't have any task.</span>`;
+  countTasks();
 }
 showTask("all");
+
+// 전체 task 개수와 남은 task개수를 출력함
+function countTasks() {
+  let CounterSpan = document.querySelector("#task-counter");
+  let completedTask = tasks.filter((obj) => obj.status === "completed");
+  let allTasksLength = tasks.length;
+  let completedTaskLength = completedTask.length;
+  let tasksLeft = allTasksLength - completedTaskLength;
+  CounterSpan.innerHTML = `${tasksLeft} / ${allTasksLength} tasks left`;
+}
 
 // 체크박스 상태에 따른 효과 적용 및 localstorage내 status 설정
 function setTaskStatus(checkedTask) {
@@ -40,15 +51,17 @@ function setTaskStatus(checkedTask) {
   if (checkedTask.checked) {
     taskName.classList.add("checked");
     tasks[checkedTask.id].status = "completed";
+    countTasks();
   } else {
     taskName.classList.remove("checked");
     tasks[checkedTask.id].status = "pending";
+    countTasks();
   }
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
 
 // Task 편집 및 편집 내용 localstorage에 반영
-function editTask(editBtn) {
+function editTask(editBtn, id) {
   const checkBox =
     editBtn.parentElement.parentElement.querySelector("label input");
   const editedTask = editBtn.parentElement.parentElement.querySelector("span");
