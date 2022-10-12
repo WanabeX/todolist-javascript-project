@@ -2,6 +2,7 @@ const taskInput = document.querySelector(".task-input input");
 const addBtn = document.querySelector(".task-input button");
 const taskBox = document.querySelector(".task-box");
 const filters = document.querySelectorAll(".filters span");
+const clearBtn = document.querySelector(".task-controls button");
 
 const TASK_KEY = "task-list";
 
@@ -17,7 +18,7 @@ function showTask(filter) {
         li += `<li class="task">
       <label for="${id}">
         <input onclick="setTaskStatus(this)" type="checkbox" id="${id}" ${isCompleted}>
-        <span class="${isCompleted}" id="tasks-left">${task.name}</span>
+        <span class="${isCompleted}">${task.name}</span>
         </label>
       <div class="settings">
         <ion-icon name="create-outline" onclick="editTask(this)"></ion-icon>
@@ -46,7 +47,7 @@ function setTaskStatus(checkedTask) {
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
 
-// Task 편집 및 편집 내용 localstorage에 저장
+// Task 편집 및 편집 내용 localstorage에 반영
 function editTask(editBtn) {
   const checkBox =
     editBtn.parentElement.parentElement.querySelector("label input");
@@ -78,13 +79,6 @@ function editTask(editBtn) {
   }
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
-
-// Task를 taskbox 및 localstorage에서 삭제
-removeTask = (removeId) => {
-  tasks.splice(removeId, 1);
-  localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
-  showTask("all");
-};
 
 // input이 비어있지 않을 경우 add버튼이 활성화
 taskInput.onkeyup = () => {
@@ -123,6 +117,20 @@ taskInput.addEventListener("keyup", function (e) {
   if (e.key == "Enter" && userTask) {
     addBtn.click();
   }
+});
+
+// 선택한 Task를 taskbox 및 localstorage에서 삭제
+removeTask = (removeId) => {
+  tasks.splice(removeId, 1);
+  localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
+  showTask("all");
+};
+
+// 모든 Task를 taskbox 및 localstorage에서 삭제
+clearBtn.addEventListener("click", () => {
+  tasks.splice(0, tasks.length);
+  localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
+  showTask("all");
 });
 
 // 클릭한 filter menu의 버튼 활성화
