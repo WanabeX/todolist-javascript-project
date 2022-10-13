@@ -154,3 +154,39 @@ filters.forEach((btn) => {
     showTask(btn.id);
   });
 });
+
+const date = document.querySelector("#today");
+
+let getTime = () => {
+  let realTime = new Date();
+  let week = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let curWeek = week[realTime.getDay()];
+  let curDay = realTime.getDate();
+  let curMonth = months[realTime.getMonth()];
+  let curYear = realTime.getFullYear();
+
+  date.innerText = `${curWeek}, ${curDay} ${curMonth} ${curYear}`;
+};
+getTime();
