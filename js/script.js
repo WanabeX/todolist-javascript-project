@@ -121,7 +121,7 @@ addBtn.addEventListener("click", function () {
   let newTaskObj = { name: userTask, status: "pending" };
   tasks.push(newTaskObj);
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
-  showTask("all");
+  showTask(document.querySelector("span.active").id);
 });
 
 // Enter키를 눌러 task 추가 및 localstorage에 저장
