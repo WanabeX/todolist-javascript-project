@@ -34,17 +34,7 @@ function showTask(filter) {
 }
 showTask("all");
 
-// 전체 task 개수와 남은 task개수를 출력함
-function countTasks() {
-  let CounterSpan = document.querySelector("#task-counter");
-  let completedTask = tasks.filter((obj) => obj.status === "completed");
-  let allTasksLength = tasks.length;
-  let completedTaskLength = completedTask.length;
-  let tasksLeft = allTasksLength - completedTaskLength;
-  CounterSpan.innerHTML = `${tasksLeft} / ${allTasksLength} tasks left`;
-}
-
-// 체크박스 상태에 따른 효과 적용 및 localstorage내 status 설정
+// task 체크 여부에 따른 효과 적용 및 status 변경
 function setTaskStatus(checkedTask) {
   const taskName =
     checkedTask.parentElement.parentElement.querySelector("span");
@@ -60,30 +50,39 @@ function setTaskStatus(checkedTask) {
   localStorage.setItem(TASK_KEY, JSON.stringify(tasks));
 }
 
-// Task 편집 및 편집 내용 localstorage에 반영
+// Task 내용 편집
 function editTask(editBtn, id) {
   const checkBox =
     editBtn.parentElement.parentElement.querySelector("label input");
   const editedTask = editBtn.parentElement.parentElement.querySelector("span");
+  //'edit'버튼 클릭 시 task를 수정가능한 상태로 변경
   if (editBtn.name === "create-outline") {
-    editedTask.setAttribute("contentEditable", true);
-    var value = editedTask.textContent;
-    editedTask.textContent = "";
-    editedTask.focus();
-    editedTask.textContent = value;
+    editedTask.setAttribute("contentEditable", true); //요소를 수정가능한 상태로 변경
+
+    //task focus시 커서를 우측에 위치시킴
+    let range = new Range(); //range를 생성
+    let sel = window.getSelection(); //커서의 위치를 나타내는 selection을 가져옴
+    range.setStart(editedTask, 1); //range의 시작점을 task(span)로 지정
+    sel.removeAllRanges(); //기존 range를 삭제
+    sel.addRange(range); //range 추가
+
+    editedTask.focus(); //task focusing 및 cursor 활성화
     editBtn.name = "checkmark-outline";
     editBtn.style.color = "#f25832";
-    checkBox.disabled = true;
+    checkBox.disabled = true; //checkbox 비활성화
+    //체크상태인 task를 수정할시 체크효과 숨김
     if (editedTask.className == "checked") {
       editedTask.classList.remove("checked");
       editedTask.classList.add("hidden-checked");
     }
+    //'check'버튼 클릭 시 수정 된 task를 localstorage에 반영
   } else if (editBtn.name === "checkmark-outline") {
     editedTask.setAttribute("contentEditable", false);
-    editedTask.blur();
+    editedTask.blur(); //focus 제거
     editBtn.name = "create-outline";
     editBtn.style.color = "";
     checkBox.disabled = false;
+    //체크상태인 task 수정완료 후 체크효과를 활성화
     if (editedTask.className == "hidden-checked") {
       editedTask.classList.remove("hidden-checked");
       editedTask.classList.add("checked");
@@ -155,10 +154,21 @@ filters.forEach((btn) => {
   });
 });
 
+// 전체 task 개수와 남은 task개수를 출력함
+function countTasks() {
+  let CounterSpan = document.querySelector("#task-counter");
+  let completedTask = tasks.filter((obj) => obj.status === "completed"); //상태가 'completed'인 object들을 불러옴
+  let allTasksLength = tasks.length; //전체 task 개수
+  let completedTaskLength = completedTask.length; //완료된 task 개수
+  let tasksLeft = allTasksLength - completedTaskLength; //전체 task - 완료된 task
+  CounterSpan.innerHTML = `${tasksLeft} / ${allTasksLength} tasks left`;
+}
+
+// 연,월,일,요일 표시
 const date = document.querySelector("#today");
 
 let getTime = () => {
-  let realTime = new Date();
+  let realTime = new Date(); //GMT 기준시간을 불러옴
   let week = [
     "Sunday",
     "Monday",
